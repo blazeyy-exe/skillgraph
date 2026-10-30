@@ -57,7 +57,7 @@ export function ExperienceList({
               <div>
                 <div className="flex items-center gap-2">
                   <span className="text-[11px] font-semibold uppercase tracking-wider text-accent">
-                    {exp.category || "General Experience"}
+                    {exp.experience_type || exp.category || "Experience"}
                   </span>
                   <span className="text-[10px] rounded bg-paper px-2 py-0.5 text-ink-soft border border-line uppercase">
                     {exp.status}
@@ -68,20 +68,22 @@ export function ExperienceList({
                     {exp.title}
                   </Link>
                 </h2>
-                {exp.role_or_contribution ? (
-                  <p className="text-xs text-ink-soft mt-0.5">Role: {exp.role_or_contribution}</p>
+                {exp.user_contribution || exp.role_or_contribution ? (
+                  <p className="text-xs text-ink-soft mt-0.5">
+                    Role: {exp.user_contribution || exp.role_or_contribution}
+                  </p>
                 ) : null}
               </div>
               <Link
                 href={`/app/experiences/${exp.id}`}
                 className="text-xs font-medium text-accent hover:underline self-start sm:self-auto"
               >
-                View full breakdown →
+                View full breakdown &amp; edit →
               </Link>
             </div>
 
             <p className="text-sm text-ink-soft italic leading-relaxed">
-              “{exp.narrative}”
+              “{exp.description || exp.narrative}”
             </p>
 
             {/* Tasks Summary */}
@@ -96,7 +98,9 @@ export function ExperienceList({
                       <span className="text-accent">•</span>
                       <span>
                         <strong className="text-ink">{task.description}</strong>{" "}
-                        <span className="text-[10px] text-ink-soft">({task.contribution_type})</span>
+                        <span className="text-[10px] text-ink-soft">
+                          ({task.action_type || task.contribution_type})
+                        </span>
                       </span>
                     </li>
                   ))}

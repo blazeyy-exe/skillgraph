@@ -1,76 +1,119 @@
-# SkillGraph — AI-Powered Capability Discovery & Intelligence Platform
+# SkillGraph
+### AI-Powered Capability Discovery & Intelligence Platform
 
-> **"Your abilities go beyond your qualifications."**
+**Your abilities go beyond your qualifications.**
 
-SkillGraph discovers capabilities developed through real-world experiences (informal work, self-teaching, community volunteering, projects, caregiving), structures them into an interactive living capability graph, validates them through practical assessment, and connects individuals to real opportunities.
+SkillGraph helps people discover, demonstrate, and develop capabilities gained through real-world experiences — including informal work, volunteering, self-learning, independent projects, caregiving, and community activities.
 
----
-
-## 1. Documentation & Architecture
-
-Comprehensive architectural and engineering specifications are located in the repository:
-
-- [PROJECT_SPEC.md](file:///D:/skillgraph/PROJECT_SPEC.md) — Product requirements, user journey, evidence states, boundaries.
-- [ARCHITECTURE.md](file:///D:/skillgraph/ARCHITECTURE.md) — Technical stack, runtime principles, client/server boundaries.
-- [DATABASE_SCHEMA.md](file:///D:/skillgraph/DATABASE_SCHEMA.md) — PostgreSQL entity relationships, RLS policies, indexing, migrations.
-- [AI_ARCHITECTURE.md](file:///D:/skillgraph/AI_ARCHITECTURE.md) — 6 intelligence modules, prompt versioning, schemas, token budgeting.
-- [IMPLEMENTATION_ROADMAP.md](file:///D:/skillgraph/IMPLEMENTATION_ROADMAP.md) — Phased rollout from Phase 0 to Phase 9.
-- [SECURITY.md](file:///D:/skillgraph/SECURITY.md) — RLS boundaries, rate-limiting, untrusted document handling, privacy controls.
+It transforms these experiences into an interactive, evidence-backed Capability Graph and connects individuals with opportunities based on what they can actually do, not just what their qualifications say.
 
 ---
 
-## 2. Tech Stack
+## The Problem
 
-- **Framework:** Next.js (App Router, Turbopack, React 19, TypeScript strict mode)
-- **Styling:** Tailwind CSS v4, editorial design system (Instrument Serif / Source Sans typography, warm paper tones)
-- **Components:** Custom accessible UI primitives, Lucide icons, React Hook Form + Zod
-- **Database & Auth:** Supabase PostgreSQL, Supabase SSR Auth, Supabase Storage
-- **Security:** PostgreSQL Row Level Security (RLS) on all user data, secure cookies, in-memory rate limiting
-- **AI Intelligence Layer:** Centralized server orchestrator with structured JSON outputs and validated Zod schemas (OpenAI-compatible provider abstraction)
+Traditional CVs, degrees, and certificates capture only a fraction of what someone can do.
 
----
+People develop valuable capabilities through everyday experiences, independent work, and practical problem-solving. Yet these abilities often remain undocumented, unrecognized, and disconnected from meaningful opportunities.
 
-## 3. Getting Started
+**The problem isn't always a lack of skills. It's that many skills are never recognized.**
+
+## What SkillGraph Does
+
+SkillGraph uses AI to uncover capabilities hidden within real-world experiences and turn them into structured, demonstrable skills.
+
+Its core system connects four elements:
+
+**Experience → Capability → Evidence → Opportunity**
+
+1. **Experience Discovery** — Understands what people have actually done through conversations, documents, projects, and other experiences.
+2. **Capability Mapping** — Identifies tasks and transferable capabilities using structured skill frameworks such as ESCO and O*NET.
+3. **Capability Graph** — Builds an interactive network connecting experiences, tasks, skills, evidence, and related capabilities.
+4. **Evidence & Verification** — Supports capabilities with work samples, projects, references, and practical assessments.
+5. **Growth Intelligence** — Identifies skill gaps and recommends practical ways to develop new capabilities.
+6. **Opportunity Matching** — Connects individuals with relevant jobs, internships, scholarships, fellowships, and projects based on demonstrated and transferable capabilities.
+7. **Capability Passport** — Creates a portable profile that individuals control and can selectively share.
+
+## The AI Intelligence Layer
+
+AI powers the intelligence behind SkillGraph, acting as a centralized system rather than a standalone chatbot.
+
+It investigates experiences, asks contextual questions, discovers capabilities, maps relationships, analyzes evidence, supports assessments, and identifies development and opportunity pathways.
+
+Every AI-generated inference remains reviewable and correctable by the user.
+
+**AI can suggest a capability, but it cannot automatically declare someone qualified.** Verification requires appropriate evidence and assessment.
+
+## What Makes It Different?
+
+- **Experience over credentials:** Recognizes capabilities developed outside formal education and employment.
+- **Evidence over claims:** Connects capabilities to real work and practical demonstrations.
+- **Connected capabilities:** Shows how different experiences contribute to related and transferable skills.
+- **Continuous development:** Evolves as individuals gain experience and improve.
+- **Opportunity based on ability:** Looks beyond conventional qualifications when identifying relevant opportunities.
+- **User ownership:** Individuals control their information and what they share.
+
+## Who It's For
+
+- Students and self-taught learners.
+- Informal workers and volunteers.
+- Independent creators and entrepreneurs.
+- Career changers.
+- People whose abilities aren't represented by traditional qualifications.
+
+**No university degree, professional job title, or certificate is required to start discovering your capabilities.**
+
+## Technology Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Next.js, React 19, TypeScript |
+| Styling | Tailwind CSS v4 |
+| Database | Supabase PostgreSQL |
+| Authentication | Supabase SSR Auth |
+| Storage | Supabase Storage |
+| AI | OpenAI API, centralized orchestration |
+| Validation | Zod |
+| Forms | React Hook Form |
+| Testing | Vitest |
+
+The platform uses server-side AI orchestration, structured outputs, database-level Row Level Security (RLS), and validated data operations.
+
+## Getting Started
 
 ### Prerequisites
-
 - Node.js 20+
-- A Supabase project (or local Supabase instance)
-- OpenAI API Key (optional for Phase 1; required from Phase 2 for AI intelligence)
+- npm
+- Supabase project
+- OpenAI API key (required for AI functionality)
 
 ### Installation
 
-1. Clone repository and install dependencies:
-   ```bash
-   npm install
-   ```
+```bash
+# Clone the repository and install dependencies
+npm install
 
-2. Configure environment variables:
-   ```bash
-   cp .env.example .env.local
-   ```
-   Provide your Supabase URL, Anon Key, and OpenAI API key.
+# Configure environment variables
+cp .env.example .env.local
+```
 
-3. Run database migrations:
-   Apply the SQL files in `supabase/migrations/` using the Supabase CLI or the Supabase SQL Editor.
+Add your Supabase credentials and OpenAI API key to `.env.local`.
 
-4. Start development server:
-   ```bash
-   npm run dev
-   ```
+Apply the database migrations in `supabase/migrations/` using the Supabase CLI or SQL Editor.
 
-5. Run automated tests and linting:
-   ```bash
-   npm run lint
-   npx vitest run
-   npm run build
-   ```
+```bash
+# Start development server
+npm run dev
+
+# Run checks
+npm run lint
+npx vitest run
+npm run build
+```
 
 ---
 
-## 4. Engineering Principles
+## The Vision
 
-1. **Real Functionality:** Every button, route, filter, and interaction is backed by real logic. Honest unconfigured states are displayed when external keys are omitted.
-2. **Strict Authorization:** RLS ensures users can only read and mutate their own records.
-3. **Evidence States:** Capabilities follow strict lifecycle transitions: `unexplored` → `inferred` → `developing` → `demonstrated`. LLMs never directly declare a skill demonstrated without rubric-verified assessment.
-4. **Editorial Aesthetic:** Restrained typography, deliberate whitespace, and meaningful data visualization—avoiding generic AI SaaS gradients.
+SkillGraph aims to make human capabilities visible, measurable, and accessible.
+
+Because what someone can do is often much bigger than what their résumé says.

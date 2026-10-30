@@ -48,8 +48,8 @@ export const LANGUAGE_OPTIONS = [
 
 export const APP_NAV = [
   { href: "/app", label: "Overview", phase: 1, ready: true },
-  { href: "/app/discover", label: "Discover", phase: 2, ready: false },
-  { href: "/app/experiences", label: "Experiences", phase: 2, ready: false },
+  { href: "/app/discover", label: "Discover", phase: 2, ready: true },
+  { href: "/app/experiences", label: "Experiences", phase: 2, ready: true },
   { href: "/app/graph", label: "Skill graph", phase: 3, ready: false },
   { href: "/app/evidence", label: "Evidence", phase: 4, ready: false },
   { href: "/app/challenges", label: "Challenges", phase: 5, ready: false },
